@@ -14,12 +14,13 @@ int main(int argc, const char* argv[])
     liquibook::examples::DepthFeedSubscriber feed(connection.get_templates());
 
     // Set up handlers
-    liquibook::examples::MessageHandler msg_handler =
-        boost::bind(&liquibook::examples::DepthFeedSubscriber::handle_message,
-                    &feed, _1, _2);
-    liquibook::examples::ResetHandler reset_handler =
-        boost::bind(&liquibook::examples::DepthFeedSubscriber::handle_reset,
-                    &feed);
+    auto msg_handler = [&feed](liquibook::examples::BufferPtr bp, size_t bytes_transferred) {
+        return feed.handle_message(bp, bytes_transferred);
+    };
+    auto reset_handler = [&feed]() {
+        feed.handle_reset();
+    };
+
     connection.set_message_handler(msg_handler);
     connection.set_reset_handler(reset_handler);
 

@@ -51,3 +51,12 @@ Release
 
 #a place to hide documents that should not go into the repo:
 doc/NotGitWorthy/
+
+# temporary build directories
+build/*
+
+# QtCreator files
+CMakeLists.txt.user
+
+# quickFAST clone
+quickfast/*
