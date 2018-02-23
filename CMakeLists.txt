@@ -41,7 +41,7 @@ target_include_directories(liquibook
     )
 target_link_libraries(liquibook
     INTERFACE
-        OCI::quickfast
+        OCI::QuickFAST
     )
 
 
